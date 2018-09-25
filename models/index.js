@@ -3,6 +3,26 @@ var db = new Sequelize('postgres://localhost:5432/wikistack', {
     logging: false
 });
 
+// const Foo = sequelize.define('foo', {
+//     firstname: Sequelize.STRING,
+//     lastname: Sequelize.STRING
+//   }, {
+//     getterMethods: {
+//       fullName() {
+//         return this.firstname + ' ' + this.lastname
+//       }
+//     },
+  
+//     setterMethods: {
+//       fullName(value) {
+//         const names = value.split(' ');
+  
+//         this.setDataValue('firstname', names.slice(0, -1).join(' '));
+//         this.setDataValue('lastname', names.slice(-1).join(' '));
+//       },
+//     }
+//   });
+
 var Page = db.define('page', {
     title: {
         type: Sequelize.STRING,
@@ -11,6 +31,12 @@ var Page = db.define('page', {
     urlTitle: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    route: {
+        type: Sequelize.STRING,
+        getRoute () {
+            return '/wiki/' + this.urlTitle +'/'
+        }
     },
     content: {
         type: Sequelize.TEXT,
