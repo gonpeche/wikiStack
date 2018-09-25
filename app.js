@@ -22,8 +22,8 @@ app.get('/', function(res,res) {
     res.render('index')
 })
 
-app.get('/wiki/add', routes)
-app.get('/wiki/', routes)
+// app.get('/wiki/add', routes)
+app.use('/wiki/', routes)
 
 // Asegurate de estar exportando tu db del archivo de tus modelos
 models.db.sync({force: true})
