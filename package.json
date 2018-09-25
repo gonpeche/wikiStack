@@ -4,7 +4,8 @@
   "description": "Wikipedia project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,9 @@
   },
   "homepage": "https://github.com/gonpeche/wikiStack#readme",
   "dependencies": {
-    "morgan": "^1.9.1"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "morgan": "^1.9.1",
+    "nunjucks": "^3.1.3"
   }
 }
