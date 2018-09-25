@@ -1,0 +1,22 @@
+{
+  "name": "wikistack",
+  "version": "1.0.0",
+  "description": "Wikipedia project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gonpeche/wikiStack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gonpeche/wikiStack/issues"
+  },
+  "homepage": "https://github.com/gonpeche/wikiStack#readme",
+  "dependencies": {
+    "morgan": "^1.9.1"
+  }
+}
