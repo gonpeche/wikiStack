@@ -31,16 +31,16 @@ var Page = db.define('page', {
     urlTitle: {
         type: Sequelize.STRING,
         allowNull: false,
-        // get() {
-        //     return '/wiki/' + page.urlTitle + '/'
-        // }
-    },
-    route: {
-        type: Sequelize.STRING,
-        getRoute () {
-            this.route = '/wiki/' + this.urlTitle +'/'
+        get() {
+            return '/wiki/' + this.getDataValue('urlTitle')
         }
     },
+    // route: {
+    //     type: Sequelize.STRING,
+    //     getRoute () {
+    //         this.route = '/wiki/' + this.urlTitle +'/'
+    //     }
+    // },
     content: {
         type: Sequelize.TEXT,
         allowNull: false
@@ -63,7 +63,7 @@ Page.hook('beforeValidate', (page, options) => {
       page.urlTitle = Math.random().toString(36).substring(2, 7);
     }
 
-    page.route = '/wiki/' + page.urlTitle + '/'
+    // page.route = '/wiki/' + page.urlTitle + '/'
 });
 
 
