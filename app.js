@@ -25,7 +25,7 @@ app.get('/', function(res,res) {
 app.use('/wiki/', routes)
 
 // Asegurate de estar exportando tu db del archivo de tus modelos
-models.db.sync({force: true})
+models.db.sync({force: false})
 .then(function () {
     // asegurate de reemplazar el nombre de abajo con tu app de express
     app.listen(3000, function () {

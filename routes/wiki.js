@@ -14,6 +14,7 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/', function(req, res, next) {
+    // res.json(req.body)
   // agregá definiciones para  `title` y `content`
   var page = Page.build({
     title: req.body.pageTitle,
@@ -26,8 +27,26 @@ router.post('/', function(req, res, next) {
   promiseSave.then(() => {
     //   res.json(promiseSave)
     // console.log(res.json(promiseSave))
-      res.redirect('/');
+      res.redirect(promiseSave.route);
     })
+});
+
+router.get('/:urlTitle', function (req, res, next) {
+    Page.findOne({ 
+      where: { 
+        urlTitle: req.params.urlTitle 
+      } 
+    })
+    .then(function(foundPage){
+        // console.log(foundPage.dataValues.title)
+        // console.log(foundPage)
+        res.render('wikipage', { 
+            pageTitle: foundPage.dataValues.title, 
+            pageContent: foundPage.dataValues.content,
+            authorName: foundPage.authorName 
+        });
+    })
+    .catch(next);
 });
 
 
