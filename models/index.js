@@ -30,7 +30,10 @@ var Page = db.define('page', {
     }, 
     urlTitle: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        // get() {
+        //     return '/wiki/' + page.urlTitle + '/'
+        // }
     },
     route: {
         type: Sequelize.STRING,

@@ -9,8 +9,15 @@ router.get('/add', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-    res.redirect('/');
-  });
+    
+    Page.findAll().then( function(resultado) {
+        
+        console.log('1',resultado);
+        console.log('2',resultado.body);
+    })
+     // res.render('index', {page: Page.findAll()})
+    // res.redirect('/');
+});
 
 
 router.post('/', function(req, res, next) {
@@ -22,13 +29,20 @@ router.post('/', function(req, res, next) {
   });
   // Asegurate que solo redirigimos **luego** que nuestro save esta completo!
   // nota:  `.save` devuelve una promesa o puede tomar un callback.
-  var promiseSave = page.save()
+//   var promiseSave = page.save()
+//   promiseSave.then(() => {
+//     //   res.json(promiseSave)
+//     // console.log('json:',res.json(promiseSave))
+//     res.json(promiseSave.)
+//     //   res.redirect(promiseSave.fulfillmentValue.route);
+//     })
 
-  promiseSave.then(() => {
-    //   res.json(promiseSave)
-    // console.log(res.json(promiseSave))
-      res.redirect(promiseSave.route);
-    })
+    page.save()
+  .then(savedPage => {
+    res.redirect(savedPage.route); // route virtual FTW
+  })
+  .catch(next);
+
 });
 
 router.get('/:urlTitle', function (req, res, next) {
