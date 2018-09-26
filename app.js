@@ -18,10 +18,8 @@ app.engine('html', nunjucks.render);
 app.use(routes)
 
 
-// Asegurate de estar exportando tu db del archivo de tus modelos
 models.db.sync({force: false})
 .then(function () {
-    // asegurate de reemplazar el nombre de abajo con tu app de express
     app.listen(3000, function () {
         console.log('Server is listening on port 3000!');
     });
