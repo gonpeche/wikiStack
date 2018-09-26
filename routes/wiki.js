@@ -12,17 +12,6 @@ router.get('/', function(req, res, next) {
     res.redirect('/');
   });
 
-// router.post('/', function(req, res, next) {
-//     // res.json(res.body);
-//     res.send(req.body)
-//     console.log(req.body)
-//     // res.send('funcionó POST /wiki/');
-// });
-
-router.get('/add', function(req, res, next) {
-    res.send('funcionó POST /wiki/add');
-});
-
 
 router.post('/', function(req, res, next) {
   // agregá definiciones para  `title` y `content`
@@ -33,8 +22,12 @@ router.post('/', function(req, res, next) {
   // Asegurate que solo redirigimos **luego** que nuestro save esta completo!
   // nota:  `.save` devuelve una promesa o puede tomar un callback.
   var promiseSave = page.save()
-  promiseSave.then(res.redirect('/'))
-  // -> después del save -> res.redirect('/');
+
+  promiseSave.then(() => {
+    //   res.json(promiseSave)
+    // console.log(res.json(promiseSave))
+      res.redirect('/');
+    })
 });
 
 
