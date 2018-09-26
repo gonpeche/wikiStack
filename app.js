@@ -6,24 +6,17 @@ var nunjucks = require('nunjucks');
 var models = require('./models');
 var routes = require('./routes'); 
 
-// app.use(morgan('tiny'))
 app.use(express.static('public'))
-
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
 
 var env = nunjucks.configure('views', {noCache: true});
 app.set('view engine', 'html');
 app.engine('html', nunjucks.render);
 
-// app.get('/', router)
-app.get('/', function(res,res) {
-    res.render('index')
-})
 
-app.use('/wiki/', routes)
-app.use('/users/', routes)
+app.use(routes)
+
 
 // Asegurate de estar exportando tu db del archivo de tus modelos
 models.db.sync({force: false})
