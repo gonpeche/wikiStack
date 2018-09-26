@@ -6,7 +6,7 @@ var nunjucks = require('nunjucks');
 var models = require('./models');
 var routes = require('./routes'); 
 
-app.use(morgan('tiny'))
+// app.use(morgan('tiny'))
 app.use(express.static('public'))
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -22,7 +22,6 @@ app.get('/', function(res,res) {
     res.render('index')
 })
 
-// app.get('/wiki/add', routes)
 app.use('/wiki/', routes)
 
 // Asegurate de estar exportando tu db del archivo de tus modelos

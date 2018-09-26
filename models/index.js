@@ -27,7 +27,7 @@ var Page = db.define('page', {
     title: {
         type: Sequelize.STRING,
         allowNull: false
-    },
+    }, 
     urlTitle: {
         type: Sequelize.STRING,
         allowNull: false
@@ -51,6 +51,17 @@ var Page = db.define('page', {
     }
 });
 
+
+Page.hook('beforeValidate', (page, options) => {
+    var title = page.title
+    if (title) {
+      page.urlTitle = title.replace(/\s+/g, '_').replace(/\W/g, '');
+    } else {
+      page.urlTitle = Math.random().toString(36).substring(2, 7);
+    }
+});
+
+
 var User = db.define('user', {
     name: {
         type: Sequelize.STRING,
@@ -64,6 +75,22 @@ var User = db.define('user', {
         }
     }
 });
+
+
+
+function generateUrlTitle (title) {
+    if (title) {
+      // Remueve todos los caracteres no-alfanuméricos 
+      // y hace a los espacios guiones bajos. 
+      return title.replace(/\s+/g, '_').replace(/\W/g, '');
+    } else {
+      // Generá de forma aleatoria un string de 5 caracteres
+      return Math.random().toString(36).substring(2, 7);
+    }
+}
+
+
+
 
 module.exports = {
   db: db,
