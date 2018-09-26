@@ -5,9 +5,16 @@ const userRouter = require('./user');
 var routes = require('../routes'); 
 
 
-// router.use('/wiki/', wikiRouter);
-// router.use('/wiki/', wikiRouter);
-router.use('/', wikiRouter)
+// router.use('/', wikiRouter);
+
+// router.get('/', function(res,res) {
+//     res.render('index')
+// })
+
+
+//nuevo 
+router.use('/', wikiRouter);
+// router.use('/users', userRouter);
 
 
 module.exports = router;

@@ -12,25 +12,48 @@ router.get('/', function(req, res, next) {
     
     Page.findAll()
     .then( x => {
-            console.log(x)
             res.render('index', {pages: x})
         }
     )
-
+    
 });
 
 router.post('/', function(req, res, next) {
-  var page = Page.build({
-    title: req.body.pageTitle,
-    content: req.body.pageContent
-  });
 
-    page.save()
-  .then(savedPage => {
-    // res.redirect(savedPage.route); // route virtual FTW
-    res.redirect(savedPage.urlTitle); // route virtual FTW
-  })
-  .catch(next);
+    User.findOrCreate({
+        where: {
+            name: req.body.name,
+            email: req.body.email
+        }
+    })
+    .then(function (values) {
+        var user = values[0];
+        var page = Page.build({
+            title: req.body.pageTitle,
+            content: req.body.pageContent
+        });
+        return page.save().then(function (page) {
+            return page.setAuthor(user);
+        });
+    })
+    .then(function (page) {
+        res.redirect(page.urlTitle);
+        // res.redirect(page.route);
+    })
+    .catch(next);
+  
+
+//   var page = Page.build({
+//     title: req.body.pageTitle,
+//     content: req.body.pageContent
+//   });
+
+//     page.save()
+//   .then(savedPage => {
+//     // res.redirect(savedPage.route); // route virtual FTW
+//     res.redirect(savedPage.urlTitle); // route virtual FTW
+//   })
+//   .catch(next);
 
 });
 
