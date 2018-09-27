@@ -15,12 +15,6 @@ var Page = db.define('page', {
             return '/wiki/' + this.getDataValue('urlTitle')
         }
     },
-    // route: {
-    //     type: Sequelize.STRING,
-    //     getRoute () {
-    //         this.route = '/wiki/' + this.urlTitle +'/'
-    //     }
-    // },
     content: {
         type: Sequelize.TEXT,
         allowNull: false
@@ -31,6 +25,10 @@ var Page = db.define('page', {
     date: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
+    },
+    tag: {
+        type: Sequelize.ARRAY(Sequelize.TEXT),
+        allowNull: false
     }
 });
 
@@ -42,8 +40,6 @@ Page.hook('beforeValidate', (page, options) => {
     } else {
       page.urlTitle = Math.random().toString(36).substring(2, 7);
     }
-
-    // page.route = '/wiki/' + page.urlTitle + '/'
 });
 
 

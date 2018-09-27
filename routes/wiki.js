@@ -9,14 +9,11 @@ router.get('/add', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-    
     Page.findAll()
     .then( x => {
             res.render('index', {pages: x})
         }
     )
-
-
 });
 
 router.post('/', function(req, res, next) {
@@ -46,20 +43,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/:urlTitle', function (req, res, next) {
-    // Page.findOne({ 
-    //   where: { 
-    //     urlTitle: req.params.urlTitle 
-    //   } 
-    // })
-    // .then(function(foundPage){
-
-    //     res.render('wikipage', { 
-    //         pageTitle: foundPage.dataValues.title, 
-    //         pageContent: foundPage.dataValues.content,
-    //         authorName: foundPage.authorName 
-    //     });
-    // })
-    // .catch(next);
+  
 
     Page.findOne({
         where: {
@@ -70,8 +54,7 @@ router.get('/:urlTitle', function (req, res, next) {
         ]
     })
     .then(function (foundPage) {
-        // la instancia page va a tener una propiedad .author 
-        // como un objeto user ({ name, email })
+
         if (foundPage === null) {
             res.status(404).send();
         } else {
